@@ -17,12 +17,16 @@ export default function Home(props) {
             <a>登录</a>
           </Link>
         </nav>
+        <h1>
+          <center>Hello thymes!</center>
+        </h1>
+        <h2>
+          <center>{props.serve}</center>
+        </h2>
       </main>
     </>
   );
 }
 Home.getInitialProps = async ({ req }) => {
-  const fn = (resolve) => resolve("我来自服务端异步" + new Date());
-  const serve = await new Promise(fn);
-  return { serve };
+  return { serve: new Date().getTime() };
 };
