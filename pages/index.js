@@ -1,32 +1,32 @@
-import Head from "next/head";
-import Link from "next/link";
-import { useEffect, useState, useRef } from "react";
-import styles from "./index.less";
-
+import Head from 'next/head'
+import App from '@/App'
+import Axios from 'axios'
+import { useEffect, useState } from 'react'
 export default function Home(props) {
+  const [data, dataChange] = useState([])
+  useEffect(() => {
+    Axios('/').then((d) => {
+      console.log(d)
+      dataChange(d.data)
+    })
+  }, [])
   return (
     <>
       <Head>
-        <title>homepage</title>
+        <title>app</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <nav>
-          <span>thymes</span>
-          <Link href="/login">
-            <a>登录</a>
-          </Link>
-        </nav>
-        <h1>
-          <center>Hello thymes!</center>
-        </h1>
-        <h2>
-          <center>{props.serve}</center>
-        </h2>
+        {JSON.stringify(props.data)}
+        <br />
+        {JSON.stringify(data)}
+        <App />
       </main>
     </>
-  );
+  )
 }
 Home.getInitialProps = async ({ req }) => {
-  return { serve: new Date().getTime() };
-};
+  const data = await Axios('/')
+  console.log(data)
+  return { data: data.data }
+}
