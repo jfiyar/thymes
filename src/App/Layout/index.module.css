@@ -1,0 +1,19 @@
+.view {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  transition: 300ms;
+}
+.header,
+.footer {
+  grid-column-start: span 2;
+}
+.header {
+  background: #dddddd;
+}
+.menu {
+  background: #00ff00;
+  transition: 300ms;
+}
+.footer {
+  background: #ff0000;
+}
